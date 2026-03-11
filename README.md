@@ -149,9 +149,17 @@ When running the mobile application on an Android device or emulator, API reques
 
 Run the following commands:
 
+ Instalar Android Studio
+
 ```bash
+$env:PATH += ";C:\Users\Usuario\AppData\Local\Android\Sdk\platform-tools"
+
+adb devices 
+
 adb reverse tcp:5000 tcp:5000  # Map Shared BFF API
 adb reverse tcp:3001 tcp:3001  # Map Mobile BFF API
+
+yarn start:mobile
 ```
 
 #### Start Specific Services
@@ -209,6 +217,17 @@ For advanced users, all functionality is centralized in the `Makefile`. Below ar
      ```bash
      npx react-native doctor
      ```
+
+4. **`SDK location not found` (Android build error)**
+   - Create the file `frontend/mobileApp/android/local.properties` with your local Android SDK path:
+     ```properties
+     # Windows
+     sdk.dir=C\:\\Users\\<YourUsername>\\AppData\\Local\\Android\\Sdk
+
+     # macOS / Linux
+     sdk.dir=/Users/<YourUsername>/Library/Android/sdk
+     ```
+   - This file is listed in `.gitignore` and must be created manually by each developer.
 
 4. **Port Conflicts**
    - Make sure no other process is using the default ports (e.g., 3000, 5000).
