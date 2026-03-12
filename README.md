@@ -1,12 +1,6 @@
-### Backend-for-Frontend (BFF) Architecture
+# Backend-for-Frontend (BFF) Architecture
 
-<p align="center">
-    <img src="https://github.com/jsdeveloperr/backend-for-frontend-architecture/blob/main/frontend/web/src/assets/backend-for-frontend.jpg" width="500" alt="Backend-for-Frontend (BFF) Architecture" />
-</p>
-
----
-
-## 📚 **Project Overview**
+## **Project Overview**
 
 **`backend-for-frontend`** is a architecture project structured to implement the **Backend-for-Frontend (BFF)** pattern. This architecture is designed to support separate backends for different frontend clients (web, mobile, etc.), ensuring tailored responses and performance optimization.
 
@@ -17,56 +11,9 @@ This monorepo manages:
 - **Mobile BFF** (`backend/mobile-bff`)
 - **Shared services** (`backend/shared`)
 
-The project leverages `Makefile` for build and dependency management and utilizes `yarn` workspaces for dependency handling.
-
 ---
 
-## 🚀 **Features**
-
-- **BFF Architecture**: Separate backend layers for Web and Mobile clients.
-- **Frontend Clients**: React.js for web and React Native for mobile.
-- **Shared Services**: Common utilities shared between BFFs.
-- **Isolated Dependency Management**: Each project manages its own dependencies via `yarn` and `Makefile`.
-- **Concurrent Development**: Ability to run multiple services simultaneously using `concurrently`.
-- **Makefile Automation**: Simplified commands for managing all services.
-
----
-
-## 🗂 **Project Structure**
-
-```plaintext
-📦 backend  
- ┣ 📂 _data  
- ┃ ┗ 📜 db.json        # JSON file for mock data  
- ┣ 📂 mobile-bff       # BFF tailored for the mobile client  
- ┣ 📂 web-bff          # BFF tailored for the web client  
- ┣ 📂 shared           # Shared backend code (e.g., validation, error handling)  
- ┗ 📜 package.json     # Backend dependencies  
-
-📦 frontend  
- ┣ 📂 mobileApp        # React Native application  
- ┃ ┣ 📂 app  
- ┃ ┃ ┣ 📂 Components   # UI components (following atomic design principles)  
- ┃ ┃ ┣ 📂 Screens      # Login, RecipeList, RecipeDetail  
- ┃ ┃ ┣ 📂 Context      # Global states (e.g., AuthContext)  
- ┃ ┃ ┗ 📂 Navigation   # React Navigation setup  
- ┣ 📂 web              # React (web) application  
- ┃ ┣ 📂 Components     # Atomic components  
- ┃ ┣ 📂 Pages          # Login, RecipeList, RecipeDetail  
- ┃ ┣ 📂 Context        # Web global states  
- ┃ ┗ 📜 index.tsx      # Entry point for the React application  
- ┗ 📜 package.json     # Frontend dependencies  
-
-📦 node_modules         # Project dependencies  
-📜 Makefile             # Automation scripts  
-📜 package.json         # Root dependencies  
-📜 README.md            # Project documentation  
-📜 yarn.lock            # Dependency version locking
-```
-
----
-
-## ⚙️ **Setup Instructions**
+## **Setup Instructions**
 
 ### 1. Prerequisites
 Make sure the following are installed:
@@ -142,6 +89,7 @@ It starts:
 - `web`
 - `mobile`
 
+
 ##### Special Notes for Android
 React Native Debugging with Android
 
@@ -166,7 +114,7 @@ adb reverse tcp:3001 tcp:3001  # Map Mobile BFF API
 
 ---
 
-## 🧹 **Cleaning**
+## **Cleaning**
 
 | Command         | Description                                  |
 |-----------------|----------------------------------------------|
@@ -175,31 +123,12 @@ adb reverse tcp:3001 tcp:3001  # Map Mobile BFF API
 
 ---
 
-## 📖 **Makefile Commands**
-
-For advanced users, all functionality is centralized in the `Makefile`. Below are the available commands:
-
-| Command                  | Description                                  |
-|--------------------------|----------------------------------------------|
-| `make install`           | Installs dependencies for all projects      |
-| `make clean`             | Cleans all `node_modules` directories       |
-| `make cache-clean`       | Cleans yarn cache                           |
-| `make start-web`         | Starts the web frontend                     |
-| `make start-mobile`      | Starts the mobile frontend                  |
-| `make start-shared`      | Starts the shared services                  |
-| `make start-backend-web-bff` | Starts the Web BFF backend               |
-| `make start-backend-mobile-bff` | Starts the Mobile BFF backend         |
-| `make start-backends`    | Starts all backend services                 |
-| `make start-frontends`   | Starts all frontend services                |
-
----
-
-## 🛡 **Troubleshooting**
+## **Troubleshooting**
 
 ### Common Issues
 
 1. **`concurrently not found`**
-   - Run `yarn add concurrently -D` in the root directory.
+   - Run `yarn add concurrently -D` or `yarn add concurrently --dev` in the root directory.
 
 2. **Missing `node_modules`**
    - Ensure `yarn install:all` was executed.
@@ -215,20 +144,6 @@ For advanced users, all functionality is centralized in the `Makefile`. Below ar
 
 ---
 
-## 💡 **Future Improvements**
-
-- Add **Docker** support for easier environment setup.
-- Implement CI/CD pipelines.
-- Enable remote caching for builds with TurboRepo.
-
----
-
-## ✨ **Contributing**
-
-We welcome contributions! Feel free to submit issues or pull requests to improve this project.
-
----
-
-## 📄 **License**
+## **License**
 
 This project is licensed under the MIT License.
