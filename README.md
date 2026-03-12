@@ -27,36 +27,17 @@ Make sure the following are installed:
 
 Project Clone:
 ```bash
-git clone https://github.com/jsdeveloperr/backend-for-frontend-architecture.git
-cd backend-for-frontend-architecture
+git clone https://github.com/julianab16/bff-architecture-example.git
+cd bff-architecture-example/
    ```
-Run the following command to install dependencies for all projects:
+Run the following command to install yarn and dependencies for all projects:
 ```bash
+npm install --global yarn
 yarn install:all
 ```
-This executes:
-```bash
-make install
-```
+- Run `yarn add concurrently -D` or `yarn add concurrently --dev`
+
 which installs dependencies for each subproject (web, mobile, shared, etc.).
-
----
-
-### 3. Clean Project
-
-To clean all `node_modules` and reset the project:
-```bash
-yarn clean:all
-```
-This runs:
-```bash
-make clean
-```
-
-To clean the yarn cache:
-```bash
-yarn cache:clean
-```
 
 ---
 
@@ -68,10 +49,6 @@ yarn cache:clean
 ```bash
 yarn start:backend
 ```
-This runs:
-```bash
-make start-backends
-```
 It starts:
 - `shared`
 - `web-bff`
@@ -80,10 +57,6 @@ It starts:
 #### 2. Frontend Services
 ```bash
 yarn start:frontend
-```
-This runs:
-```bash
-make start-frontends
 ```
 It starts:
 - `web`
