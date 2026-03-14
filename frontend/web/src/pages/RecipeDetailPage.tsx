@@ -25,8 +25,11 @@ const RecipeDetailPage: React.FC = () => {
   const [recipe, setRecipe] = useState<Recipe | null>(null);
 
   useEffect(() => {
+    const token = localStorage.getItem('token');
     axios
-      .get(`http://localhost:5000/recipes/${id}`)
+      .get(`http://localhost:3002/recipes/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((response) => setRecipe(response.data))
       .catch((error) => console.error('Error fetching recipe:', error));
   }, [id]);

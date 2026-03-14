@@ -10,7 +10,10 @@ const LoginScreen: React.FC = () => {
 
   const handleLogin = async () => {
     try {
-      await login(email, password);
+      const success = await login(email, password);
+      if (!success) {
+        Alert.alert('Login Failed', 'Invalid email or password');
+      }
     } catch (error) {
       Alert.alert('Login Failed', 'Invalid email or password');
     }

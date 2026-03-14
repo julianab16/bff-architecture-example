@@ -30,7 +30,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const handleLogin = async (email: string, password: string): Promise<boolean> => {
         const success = await login(email, password);
         if (success) {
-            setToken(getAuthToken());
+            const authToken = getAuthToken();
+            axios.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;
+            setToken(authToken);
             setIsLoggedIn(true);
         }
         return success;

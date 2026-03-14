@@ -14,7 +14,7 @@ const LoginForm = (props: LoginFormProps) => {
 
     const handleLogin = async () => {
         try {
-            const response = await axios.post('http://localhost:5000/login', { email, password });
+            const response = await axios.post('http://localhost:3002/login', { email, password });
 
             const { token } = response.data;
 

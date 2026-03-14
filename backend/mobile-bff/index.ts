@@ -10,6 +10,18 @@ const BACKEND_URL = 'http://localhost:5000';
 app.use(cors());
 app.use(express.json());
 
+
+app.post('/login', async (req: Request, res: Response) => {
+    try {
+        const response = await axios.post(`${BACKEND_URL}/login`, req.body);
+        res.json(response.data);
+    } catch (error: any) {
+        const status = error?.response?.status || 401;
+        const message = error?.response?.data?.message || 'Invalid credentials';
+        res.status(status).send(message);
+    }
+});
+
 app.get('/products/featured', authenticateToken, async (req: Request, res: Response) => {
     try {
         const response = await axios.get(`${BACKEND_URL}/products`);
@@ -27,6 +39,25 @@ app.get('/categories', async (req: Request, res: Response) => {
         res.json(categories);
     } catch (error) {
         res.status(500).send('Error fetching categories');
+    }
+});
+
+app.get('/recipes', authenticateToken, async (req: Request, res: Response) => {
+    try {
+        const response = await axios.get(`${BACKEND_URL}/recipes`);
+        const easyRecipes = response.data.filter((recipe: any) => recipe.difficulty === 'Easy');
+        res.json(easyRecipes);
+    } catch (error) {
+        res.status(500).send('Error fetching recipes');
+    }
+});
+
+app.get('/recipes/:id', authenticateToken, async (req: Request, res: Response) => {
+    try {
+        const response = await axios.get(`${BACKEND_URL}/recipes/${req.params.id}`);
+        res.json(response.data);
+    } catch (error) {
+        res.status(500).send('Error fetching recipe detail');
     }
 });
 

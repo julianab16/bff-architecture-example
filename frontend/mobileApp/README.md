@@ -2,7 +2,76 @@ This is a new [**React Native**](https://reactnative.dev) project, bootstrapped 
 
 # Getting Started
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+> **Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) before proceeding. You need: Node.js >= 18, Android Studio, and an AVD emulator configured.
+
+---
+
+## Setup & Run (Windows)
+
+### 1. Habilitar Long Paths en Windows (solo una vez, requiere Administrador)
+Abre PowerShell como **Administrador** y ejecuta:
+```powershell
+New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force
+```
+
+### 2. Instalar dependencias (desde la raíz del monorepo)
+```bash
+npm install --global yarn
+yarn install:all
+yarn add concurrently -D
+```
+
+### 3. Crear archivo local.properties para Android SDK
+Crea el archivo `frontend/mobileApp/android/local.properties`:
+```properties
+sdk.dir=C\:\\Users\\Usuario\\AppData\\Local\\Android\\Sdk
+```
+
+### 4. Iniciar el backend (Terminal 1)
+```bash
+yarn start:backend
+```
+Esto levanta:
+- **Shared backend** en puerto `5000`
+- **Mobile BFF** en puerto `3001`
+- **Web BFF** en puerto `3000`
+
+### 5. Configurar adb reverse para el emulador (Terminal 2)
+```powershell
+$env:PATH += ";C:\Users\Usuario\AppData\Local\Android\Sdk\platform-tools"
+
+adb reverse tcp:3001 tcp:3001
+adb reverse tcp:5000 tcp:5000
+adb reverse tcp:8081 tcp:8081
+```
+
+### 6. Lanzar el emulador
+Abre **Android Studio → Device Manager** y lanza el emulador `Pixel_9_2` (o el que tengas configurado).
+
+### 7. Ejecutar la app (Terminal 3)
+```bash
+cd frontend/mobileApp
+npx react-native run-android
+```
+
+---
+
+## Si el build falla por rutas largas (CMake error)
+Limpia el caché de Gradle y CMake:
+```powershell
+Remove-Item -Recurse -Force android\.gradle -ErrorAction SilentlyContinue
+Remove-Item -Recurse -Force android\app\.cxx -ErrorAction SilentlyContinue
+Remove-Item -Recurse -Force android\app\build -ErrorAction SilentlyContinue
+```
+Luego vuelve a ejecutar `npx react-native run-android`.
+
+## Si el puerto 3001 ya está en uso
+```powershell
+$p = (Get-NetTCPConnection -LocalPort 3001 -ErrorAction SilentlyContinue).OwningProcess
+if ($p) { Stop-Process -Id $p -Force }
+```
+
+---
 
 ## Step 1: Start the Metro Server
 

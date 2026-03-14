@@ -16,8 +16,11 @@ const HomePage: React.FC = () => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
 
   useEffect(() => {
+    const token = localStorage.getItem('token');
     axios
-      .get('http://localhost:5000/recipes')
+      .get('http://localhost:3002/recipes', {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((response) => setRecipes(response.data))
       .catch((error) => console.error('Error fetching recipes:', error));
   }, []);

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Recipe } from "@/Types/recipe";
 
-const API_BASE_URL = 'http://localhost:5000';
+const API_BASE_URL = 'http://localhost:3001';
 
 export const fetchRecipes = async (): Promise<Recipe[]> => {
   const response = await axios.get(`${API_BASE_URL}/recipes`);

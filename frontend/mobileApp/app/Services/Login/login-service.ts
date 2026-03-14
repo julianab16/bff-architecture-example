@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { saveToken, getToken, removeToken } from '@/Utils/storage';
 
-const API_BASE_URL = 'http://localhost:5000';
+const API_BASE_URL = 'http://localhost:3001';
 
 export const login = async (email: string, password: string): Promise<boolean> => {
     try {
@@ -37,4 +37,9 @@ export const getAuthToken = (): string | null => {
 export const isAuthenticated = (): boolean => {
     const token = getAuthToken();
     return token !== null;
+};
+
+export const fetchRecipes = async () => {
+  const response = await axios.get(`${API_BASE_URL}/recipes`);
+  return response.data;
 };
